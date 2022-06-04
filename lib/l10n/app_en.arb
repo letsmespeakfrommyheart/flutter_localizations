@@ -1,0 +1,40 @@
+{
+	"title": "Honey shop",
+	"winnieName": "Winnie the Pooh",
+	"rabbitName": "Rabbit",
+	"pigName": "Piglet",
+	
+	"purchase": "Date: {date}",
+	"@purchase": {
+		"placeholders": {
+		"date": {
+			"type": "DateTime",
+			"format": "yMMMd"
+		}
+	}
+	},
+
+	"honey": "{amount, plural, =0{No one jars} =1{{amount} jar} =other{{amount} jars}}",
+	"@honey": {
+		"placeholders": {
+		"amount": {}
+		}
+	},
+	"manufacturer": "{manufacturer}",
+	"@manufacturer": {
+	"placeholders" : {
+	"manufacturer": {}
+	}
+	},
+
+	"total": "Total: {value}",
+	"@total": {
+		"placeholders": {
+			"value":{
+				"type": "double",
+				"format": "currency"
+			}
+		}
+	}
+
+}

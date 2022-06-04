@@ -1,0 +1,37 @@
+{
+	"title": "Медовая лавка",
+	"purchase": "Дата покупки: {date}",
+	"@purchase":{
+		"placeholders": {
+		"date": {
+			"type": "DateTime",
+			"format": "yMMMd"
+		}
+	}
+	},
+	"winnieName": "Винни-Пух",
+	"rabbitName": "Кролик",
+	"pigName": "Пятачок",
+	"honey": "{amount, plural, =0{Ни одной банки} =1{{amount} банка} =few{{amount} банки} =other{{amount} банок}}",
+	"@honey": {
+		"placeholders": {
+		"amount": {}
+		}
+	},
+	"manufacturer": "{manufacturer}",
+	"@manufacturer": {
+	"placeholders" : {
+	"manufacturer": {}
+	}
+	},
+	"total": "Cумма покупки: {value}",
+	"@total": {
+		"placeholders": {
+			"value":{
+				"type": "double",
+				"format": "currency"
+			}
+		}
+	}
+
+}

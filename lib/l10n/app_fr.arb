@@ -1,0 +1,41 @@
+{
+	"title": "Miel étal",
+	"winnieName": "Winnie l'ourson",
+	"rabbitName": "Lapin",
+	"pigName": "Porcelet",
+
+	
+	"purchase": "Date: {date}",
+	"@purchase": {
+		"placeholders": {
+		"date": {
+			"type": "DateTime",
+			"format": "yMMMd"
+		}
+	}
+	},
+
+	"honey": "{amount, plural, =0{Aucun} =1{{amount} pot} =other{{amount} pots}}",
+	"@honey": {
+		"placeholders": {
+		"amount": {}
+		}
+	},
+	"manufacturer": "{manufacturer}",
+	"@manufacturer": {
+	"placeholders" : {
+	"manufacturer": {}
+	}
+	},
+
+	"total": "Montant: {value}",
+	"@total": {
+		"placeholders": {
+			"value":{
+				"type": "double",
+				"format": "currency"
+			}
+		}
+	}
+
+}
