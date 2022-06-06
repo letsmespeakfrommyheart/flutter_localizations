@@ -3,49 +3,45 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+import 'package:localisation_sample/lang_provider.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  Locale _locale = Locale('en', '');
-
-  void setLocale(Locale value) {
-    setState(() {
-      _locale = value;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      locale: _locale,
-      localizationsDelegates: [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: [
-        const Locale('en', ''),
-        const Locale('ru', ''),
-        const Locale('fr', ''),
-      ],
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return ChangeNotifierProvider<LangProvider>(
+      create: (context) => LangProvider(),
+      child: Builder(
+        builder: (context) => MaterialApp(
+          debugShowCheckedModeBanner: false,
+          locale:
+              Provider.of<LangProvider>(context, listen: true).currentLocale,
+          localizationsDelegates: [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: [
+            const Locale('en', ''),
+            const Locale('ru', ''),
+            const Locale('fr', ''),
+          ],
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          initialRoute: '/',
+          routes: {
+            '/': (context) => MyHomeWidget(),
+          },
+        ),
       ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => MyHomeWidget(),
-      },
     );
   }
 }
@@ -68,7 +64,11 @@ class _MyHomeWidgetState extends State<MyHomeWidget> {
     DateTime datePig = DateTime.parse("2022-05-19");
     return Scaffold(
       appBar: AppBar(
-        title: Text(translation.title),
+        backgroundColor: Colors.yellow.shade800,
+        title: Text(
+          translation.title,
+          style: TextStyle(color: Colors.black),
+        ),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -78,13 +78,31 @@ class _MyHomeWidgetState extends State<MyHomeWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               FloatingActionButton.extended(
-                  onPressed: () {}, label: Text("English")),
+                  backgroundColor: Colors.yellowAccent[700],
+                  onPressed: () {
+                    context.read<LangProvider>().changeLocale("en");
+                  },
+                  label: Text(
+                    "English",
+                    style: TextStyle(color: Colors.black),
+                  )),
               FloatingActionButton.extended(
-                  onPressed: () {}, label: Text("Русский")),
+                  backgroundColor: Colors.yellowAccent[700],
+                  onPressed: () {
+                    context.read<LangProvider>().changeLocale("ru");
+                  },
+                  label:
+                      Text("Русский", style: TextStyle(color: Colors.black))),
               FloatingActionButton.extended(
-                  onPressed: () {}, label: Text("Français"))
+                  backgroundColor: Colors.yellowAccent[700],
+                  onPressed: () {
+                    context.read<LangProvider>().changeLocale("fr");
+                  },
+                  label:
+                      Text("Français", style: TextStyle(color: Colors.black)))
             ],
           ),
+          SizedBox(height: 4),
           Card(
             elevation: 5,
             child: Padding(
